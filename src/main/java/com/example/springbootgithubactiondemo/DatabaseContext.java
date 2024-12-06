@@ -1,10 +1,7 @@
 package com.example.springbootgithubactiondemo;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
-import org.bson.UuidRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,11 +20,6 @@ public class DatabaseContext extends AbstractMongoClientConfiguration {
 
     @Bean
     public MongoClient mongoClient() {
-        MongoClientSettings clientSettings =
-                MongoClientSettings.builder()
-                        .uuidRepresentation(UuidRepresentation.STANDARD)
-                        .applyConnectionString(new ConnectionString("mongodb://" + databaseProperties.getHost() + ":" + databaseProperties.getPort()))
-                        .build();
-        return MongoClients.create(clientSettings);
+        return MongoClients.create("mongodb://" + databaseProperties.getHost() + ":" + databaseProperties.getPort());
     }
 }
