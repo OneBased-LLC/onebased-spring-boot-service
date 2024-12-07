@@ -3,6 +3,7 @@ package com.example.springbootgithubactiondemo.controller;
 import com.example.springbootgithubactiondemo.DatabaseConfig;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.bson.Document;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,10 +31,12 @@ public class HomeController {
     private DatabaseConfig databaseProperties;
 
 
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping("home")
     public String index(){
         return "OneBased Backend Service home endpoint running as expected.";
     }
+
 
     @Operation(
             summary = "Submit data",
